@@ -3,12 +3,12 @@ package main;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AddUserResult {
+public class CreateAccountResult {
 	 
-	@FindBy(xpath = "//*[@id=\"root\"]/div/div/div/div/div/p")
+	@FindBy(id = "resultText")
 	private WebElement outputMessage;
 	
-	public String addUserAttemptText() {
+	public String createAccountAttemptText() {
 		return outputMessage.getText();
 	}
 

@@ -24,12 +24,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import main.AddUserEntry;
-import main.AddUserResult;
+import main.CreateAccountEntry;
+import main.CreateAccountResult;
 import main.Constant;
 
 @RunWith(Parameterized.class)
-public class ParametisedTest {
+public class CreateAccountParametisedTest {
 	
 	@Parameters
 	public static Collection<Object[]> inputData() throws IOException {
@@ -37,31 +37,39 @@ public class ParametisedTest {
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		
-		Object[][] obj = new Object[sheet.getPhysicalNumberOfRows()-1][4];
+		Object[][] obj = new Object[sheet.getPhysicalNumberOfRows()-1][6];
 		
 		for (int rowNum = 1; rowNum < sheet.getPhysicalNumberOfRows(); rowNum++) {
+			
 				obj[rowNum-1][0] = sheet.getRow(rowNum).getCell(0).getStringCellValue();
 				obj[rowNum-1][1] = sheet.getRow(rowNum).getCell(1).getStringCellValue();
 				obj[rowNum-1][2] = sheet.getRow(rowNum).getCell(2).getStringCellValue();
-				obj[rowNum-1][3] = rowNum;
+				obj[rowNum-1][3] = sheet.getRow(rowNum).getCell(3).getStringCellValue();
+				obj[rowNum-1][4] = sheet.getRow(rowNum).getCell(4).getStringCellValue();
+				obj[rowNum-1][5] = rowNum;
 			}
 		workbook.close();
 		return Arrays.asList(obj);
 		
 		}
 	
-	private String username;
+	private String fullName;
+	private String email;
 	private String password;
+	private String confirmPassword;
 	private String expected;
 	private int rowNum;
 	private WebDriver driver;
 	
-	public ParametisedTest(String username, String password, String expected, int rowNum) {
-		this.username = username;
+	public CreateAccountParametisedTest(String fullName, String email, String password, String confirmPassword, String expected, int rowNum) {
+		this.fullName = fullName;
+		this.email = email;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
 		this.expected = expected;
 		this.rowNum = rowNum;
 	}
+	
 	
 	@Before
 	public void setup() {
@@ -70,15 +78,15 @@ public class ParametisedTest {
 	}
 	
 	@Test
-	public void addUserAttempt() throws IOException, InterruptedException {
+	public void addAccountAttempt() throws IOException, InterruptedException {
 
-		driver.get(Constant.ADDUSERPAGE);
-		AddUserEntry addUserPage = PageFactory.initElements(driver, AddUserEntry.class);
-		addUserPage.addUser(username, password);
+		driver.get(Constant.ADDACCOUNTPAGE);
+		CreateAccountEntry addAccountPage = PageFactory.initElements(driver, CreateAccountEntry.class);
+		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 		
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		
-		AddUserResult addUserResult = PageFactory.initElements(driver, AddUserResult.class);
+		CreateAccountResult addAccountResult = PageFactory.initElements(driver, CreateAccountResult.class);
 		
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -86,25 +94,24 @@ public class ParametisedTest {
 		
 		XSSFRow row = sheet.getRow(rowNum);
 		XSSFCell cell;
-		cell = row.getCell(3);
+		cell = row.getCell(5);
 		if (cell == null) {
-			cell = row.createCell(3);
+			cell = row.createCell(5);
 		}
 		
-		
-		cell.setCellValue(addUserResult.addUserAttemptText());
+		cell.setCellValue(addAccountResult.createAccountAttemptText());
 		
 		try {
-			assertEquals("User not added.", expected, addUserResult.addUserAttemptText());
-			cell = row.getCell(4);
+			assertEquals("Test failure.", expected, addAccountResult.createAccountAttemptText());
+			cell = row.getCell(6);
 			if (cell == null) {
-				cell = row.createCell(4);
+				cell = row.createCell(6);
 			}
 			cell.setCellValue("PASS");
 		} catch (AssertionError fail) {
-			cell = row.getCell(4);
+			cell = row.getCell(6);
 			if (cell == null) {
-				cell = row.createCell(4); 
+				cell = row.createCell(6); 
 			}
 			cell.setCellValue("FAIL");
 			fail("test failure");

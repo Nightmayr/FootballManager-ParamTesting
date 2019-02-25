@@ -22,6 +22,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 
 import main.CreateAccountEntry;
@@ -74,7 +75,9 @@ public class CreateAccountParametisedTest {
 	@Before
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", Constant.CHROMEDRIVERLOCATION);
-		driver = new ChromeDriver();
+		ChromeOptions chromeoptions = new ChromeOptions();
+		chromeoptions.addArguments("--headless");
+		driver = new ChromeDriver(chromeoptions);
 	}
 	
 	@Test

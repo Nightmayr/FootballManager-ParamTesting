@@ -13,7 +13,7 @@ public class TestSuiteRunner {
 		}
 		System.out.println();
 		System.out.println("All tests pass y/n?:\n" + result.wasSuccessful());
-		System.out.println("Test time:\n" + result.getRunTime()/1000 +"s");
+		System.out.println("Test time:\n" + result.getRunTime() / 1000 + "s");
 	}
 
 }

@@ -31,7 +31,7 @@ import main.LoginResult;
 
 @RunWith(Parameterized.class)
 public class LoginNoEmailParaTest {
-	
+
 	@Parameters
 	public static Collection<Object[]> inputData() throws IOException {
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
@@ -50,7 +50,7 @@ public class LoginNoEmailParaTest {
 		return Arrays.asList(obj);
 
 	}
-	
+
 	private String password;
 	private String expected;
 	private int rowNum;

@@ -31,7 +31,7 @@ import main.CreateAccountResult;
 
 @RunWith(Parameterized.class)
 public class CreateAccountNoInputParaTest {
-	
+
 	@Parameters
 	public static Collection<Object[]> inputData() throws IOException {
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);

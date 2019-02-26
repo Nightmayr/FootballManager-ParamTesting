@@ -31,7 +31,7 @@ import main.LoginResult;
 
 @RunWith(Parameterized.class)
 public class LoginNoInputParaTest {
-	
+
 	@Parameters
 	public static Collection<Object[]> inputData() throws IOException {
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);

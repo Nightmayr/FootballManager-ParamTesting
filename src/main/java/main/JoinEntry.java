@@ -5,16 +5,27 @@ import org.openqa.selenium.support.FindBy;
 
 public class JoinEntry {
 	
-	@FindBy(id = "join-list")
-	private WebElement joinButton;
+	@FindBy(id = "fullNameInput")
+	private WebElement fullName;
 
-	public void joinAttempt() {
-		joinButton.click();
-	}
-	
-	public void removeAttempt() {
-		joinButton.click();
-		joinButton.click();
+	@FindBy(id = "emailInput")
+	private WebElement email;
+
+	@FindBy(id = "passwordInput")
+	private WebElement password;
+
+	@FindBy(id = "confirmInput")
+	private WebElement confirmPassword;
+
+	@FindBy(id = "createButton")
+	private WebElement createButton;
+
+	public void addAccount(String name, String emessage, String pword, String confirm) {
+		fullName.sendKeys(name);
+		email.sendKeys(emessage);
+		password.sendKeys(pword);
+		confirmPassword.sendKeys(confirm);
+		createButton.click();
 	}
 
 }

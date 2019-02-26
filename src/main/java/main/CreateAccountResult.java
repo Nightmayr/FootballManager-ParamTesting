@@ -8,8 +8,15 @@ public class CreateAccountResult {
 	@FindBy(id = "errorMessage")
 	private WebElement outputMessage;
 	
+	@FindBy(id = "header")
+	private WebElement redirectPage;
+	
 	public String createAccountAttemptText() {
 		return outputMessage.getText();
+	}
+	
+	public String createAccountAttemptTextOnRedirect() {
+		return redirectPage.getText();
 	}
 
 }

@@ -25,18 +25,18 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 
+import main.Constant;
 import main.CreateAccountEntry;
 import main.CreateAccountResult;
-import main.Constant;
 
 @RunWith(Parameterized.class)
-public class CreateAccountParametisedTest {
+public class CreateAccountPasswordMatchTest {
 	
 	@Parameters
 	public static Collection<Object[]> inputData() throws IOException {
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
-		XSSFSheet sheet = workbook.getSheetAt(0);
+		XSSFSheet sheet = workbook.getSheetAt(10);
 		
 		Object[][] obj = new Object[sheet.getPhysicalNumberOfRows()-1][6];
 		
@@ -62,7 +62,7 @@ public class CreateAccountParametisedTest {
 	private int rowNum;
 	private WebDriver driver;
 	
-	public CreateAccountParametisedTest(String fullName, String email, String password, String confirmPassword, String expected, int rowNum) {
+	public CreateAccountPasswordMatchTest(String fullName, String email, String password, String confirmPassword, String expected, int rowNum) {
 		this.fullName = fullName;
 		this.email = email;
 		this.password = password;
@@ -87,13 +87,13 @@ public class CreateAccountParametisedTest {
 		CreateAccountEntry addAccountPage = PageFactory.initElements(driver, CreateAccountEntry.class);
 		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 		
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		
 		CreateAccountResult addAccountResult = PageFactory.initElements(driver, CreateAccountResult.class);
 		
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
-		XSSFSheet sheet = workbook.getSheetAt(0);
+		XSSFSheet sheet = workbook.getSheetAt(10);
 		
 		XSSFRow row = sheet.getRow(rowNum);
 		XSSFCell cell;
@@ -102,10 +102,10 @@ public class CreateAccountParametisedTest {
 			cell = row.createCell(5);
 		}
 		
-		cell.setCellValue(addAccountResult.createAccountAttemptTextOnRedirect());
+		cell.setCellValue(addAccountResult.createAccountAttemptText());
 		
 		try {
-			assertEquals("Test failure.", expected, addAccountResult.createAccountAttemptTextOnRedirect());
+			assertEquals("Test failure.", expected, addAccountResult.createAccountAttemptText());
 			cell = row.getCell(6);
 			if (cell == null) {
 				cell = row.createCell(6);
@@ -136,5 +136,5 @@ public class CreateAccountParametisedTest {
 	public void teardown() {
 		driver.quit();
 	}
-	
+
 }

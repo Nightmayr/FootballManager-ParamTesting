@@ -30,13 +30,13 @@ import main.LoginEntry;
 import main.LoginResult;
 
 @RunWith(Parameterized.class)
-public class LoginNoEmailParaTest {
+public class LoginNoPassParaTest {
 	
 	@Parameters
 	public static Collection<Object[]> inputData() throws IOException {
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
-		XSSFSheet sheet = workbook.getSheetAt(7);
+		XSSFSheet sheet = workbook.getSheetAt(8);
 
 		Object[][] obj = new Object[sheet.getPhysicalNumberOfRows() - 1][3];
 
@@ -51,13 +51,13 @@ public class LoginNoEmailParaTest {
 
 	}
 	
-	private String password;
+	private String email;
 	private String expected;
 	private int rowNum;
 	private WebDriver driver;
 
-	public LoginNoEmailParaTest(String password, String expected, int rowNum) {
-		this.password = password;
+	public LoginNoPassParaTest(String email, String expected, int rowNum) {
+		this.email = email;
 		this.expected = expected;
 		this.rowNum = rowNum;
 	}
@@ -75,7 +75,7 @@ public class LoginNoEmailParaTest {
 
 		driver.get(Constant.LOGINPAGE);
 		LoginEntry loginPage = PageFactory.initElements(driver, LoginEntry.class);
-		loginPage.loginNoEmail(password);
+		loginPage.loginNoPassword(email);
 
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
@@ -83,7 +83,7 @@ public class LoginNoEmailParaTest {
 
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
-		XSSFSheet sheet = workbook.getSheetAt(7);
+		XSSFSheet sheet = workbook.getSheetAt(8);
 
 		XSSFRow row = sheet.getRow(rowNum);
 		XSSFCell cell;

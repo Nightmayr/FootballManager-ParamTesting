@@ -5,10 +5,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginEntry {
 
-	@FindBy(id = "emailInput")
+	@FindBy(id = "user-email")
 	private WebElement email;
 
-	@FindBy(id = "passwordInput")
+	@FindBy(id = "password")
 	private WebElement password;
 
 	@FindBy(id = "login")

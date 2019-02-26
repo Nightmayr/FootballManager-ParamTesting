@@ -80,7 +80,7 @@ public class LoginParametisedTest {
 		LoginEntry loginPage = PageFactory.initElements(driver, LoginEntry.class);
 		loginPage.loginAttempt(email, password);
 
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
 		LoginResult loginResult = PageFactory.initElements(driver, LoginResult.class);
 
@@ -95,10 +95,10 @@ public class LoginParametisedTest {
 			cell = row.createCell(3);
 		}
 
-		cell.setCellValue(loginResult.loginAttemptText());
+		cell.setCellValue(loginResult.loginAttemptTextOnRedirect());
 
 		try {
-			assertEquals("Test failure.", expected, loginResult.loginAttemptText());
+			assertEquals("Test failure.", expected, loginResult.loginAttemptTextOnRedirect());
 			cell = row.getCell(4);
 			if (cell == null) {
 				cell = row.createCell(4);

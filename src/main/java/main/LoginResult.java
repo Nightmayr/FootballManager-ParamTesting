@@ -8,8 +8,15 @@ public class LoginResult {
 	@FindBy(id = "errorMessage")
 	private WebElement outputMessage;
 	
+	@FindBy(id = "header")
+	private WebElement redirectPage;
+	
 	public String loginAttemptText() {
 		return outputMessage.getText();
+	}
+	
+	public String loginAttemptTextOnRedirect() {
+		return redirectPage.getText();
 	}
 
 }

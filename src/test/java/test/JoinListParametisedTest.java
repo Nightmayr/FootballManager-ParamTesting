@@ -83,14 +83,15 @@ public class JoinListParametisedTest {
 	@Test
 	public void addAccountAttempt() throws IOException, InterruptedException {
 
-		driver.get(Constant.ADDACCOUNTPAGE);
+		driver.get(Constant.LOCAL_BASE + Constant.ADD_ACCOUNT_PAGE);
 		JoinEntry addAccountPage = PageFactory.initElements(driver, JoinEntry.class);
 		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 
 		JoinResult addAccountResult = PageFactory.initElements(driver, JoinResult.class);
-
+		addAccountResult.joinButtonClick();
+		
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(11);

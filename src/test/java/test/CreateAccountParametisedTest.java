@@ -83,11 +83,11 @@ public class CreateAccountParametisedTest {
 	@Test
 	public void addAccountAttempt() throws IOException, InterruptedException {
 
-		driver.get(Constant.ADDACCOUNTPAGE);
+		driver.get(Constant.LOCAL_BASE + Constant.ADD_ACCOUNT_PAGE);
 		CreateAccountEntry addAccountPage = PageFactory.initElements(driver, CreateAccountEntry.class);
 		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 
 		CreateAccountResult addAccountResult = PageFactory.initElements(driver, CreateAccountResult.class);
 

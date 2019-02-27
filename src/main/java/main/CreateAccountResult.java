@@ -5,10 +5,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class CreateAccountResult {
 	 
-	@FindBy(id = "errorMessage")
+	@FindBy(id = "errorMessageCreate")
 	private WebElement outputMessage;
 	
-	@FindBy(id = "header")
+	@FindBy(id = "tagline")
 	private WebElement redirectPage;
 	
 	public String createAccountAttemptText() {

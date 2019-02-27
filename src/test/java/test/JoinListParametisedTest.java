@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.FileInputStream;
@@ -106,7 +106,7 @@ public class JoinListParametisedTest {
 		cell.setCellValue(addAccountResult.joinAttemptText());
 
 		try {
-			assertTrue(addAccountResult.joinAttemptText().contains(expected));
+			assertEquals("Test failure.", expected, addAccountResult.joinAttemptText());
 			cell = row.getCell(6);
 			if (cell == null) {
 				cell = row.createCell(6);

@@ -8,15 +8,15 @@ public class JoinResult {
 	@FindBy(id = "join-list")
 	private WebElement joinButton;
 
-	@FindBy(id = "playerListEntry")
-	private WebElement playerListEntry;
+	@FindBy(id = "updateMessageJoin")
+	private WebElement updateMessage;
 
 	public void joinButtonClick() {
 		joinButton.click();
 	}
 
 	public String joinAttemptText() {
-		return playerListEntry.getText();
+		return updateMessage.getText();
 	}
 
 }

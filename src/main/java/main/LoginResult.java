@@ -8,7 +8,7 @@ public class LoginResult {
 	@FindBy(id = "errorMessageLogin")
 	private WebElement outputMessage;
 	
-	@FindBy(id = "tagline")
+	@FindBy(id = "header-1")
 	private WebElement redirectPage;
 	
 	public String loginAttemptText() {

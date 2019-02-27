@@ -93,6 +93,8 @@ public class LeaveListParametisedTest {
 		addAccountResult.joinButtonClick();
 		addAccountResult.joinButtonClick();
 		
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(12);

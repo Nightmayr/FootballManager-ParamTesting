@@ -8,7 +8,7 @@ public class CreateAccountResult {
 	@FindBy(id = "errorMessageCreate")
 	private WebElement outputMessage;
 	
-	@FindBy(id = "header-1")
+	@FindBy(id = "name")
 	private WebElement redirectPage;
 	
 	public String createAccountAttemptText() {

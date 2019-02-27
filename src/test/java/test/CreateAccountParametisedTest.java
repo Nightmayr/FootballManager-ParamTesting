@@ -22,7 +22,6 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 
 import main.Constant;
@@ -75,9 +74,7 @@ public class CreateAccountParametisedTest {
 	@Before
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", Constant.CHROMEDRIVERLOCATION);
-		ChromeOptions chromeoptions = new ChromeOptions();
-		chromeoptions.addArguments("--headless");
-		driver = new ChromeDriver(chromeoptions);
+		driver = new ChromeDriver();
 	}
 
 	@Test
@@ -88,7 +85,7 @@ public class CreateAccountParametisedTest {
 		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
-
+		
 		CreateAccountResult addAccountResult = PageFactory.initElements(driver, CreateAccountResult.class);
 
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);

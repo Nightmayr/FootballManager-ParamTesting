@@ -88,10 +88,12 @@ public class JoinListParametisedTest {
 		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 
 		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
-
+		
 		JoinResult addAccountResult = PageFactory.initElements(driver, JoinResult.class);
 		addAccountResult.joinButtonClick();
 		
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(11);

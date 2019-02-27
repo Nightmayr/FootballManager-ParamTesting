@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.FileInputStream;
@@ -83,13 +83,16 @@ public class JoinListParametisedTest {
 	@Test
 	public void addAccountAttempt() throws IOException, InterruptedException {
 
-		driver.get(Constant.ADDACCOUNTPAGE);
+		driver.get(Constant.LOCAL_BASE + Constant.ADD_ACCOUNT_PAGE);
 		JoinEntry addAccountPage = PageFactory.initElements(driver, JoinEntry.class);
 		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		
 		JoinResult addAccountResult = PageFactory.initElements(driver, JoinResult.class);
+		addAccountResult.joinButtonClick();
+		
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -105,7 +108,7 @@ public class JoinListParametisedTest {
 		cell.setCellValue(addAccountResult.joinAttemptText());
 
 		try {
-			assertTrue(addAccountResult.joinAttemptText().contains(expected));
+			assertEquals("Test failure.", expected, addAccountResult.joinAttemptText());
 			cell = row.getCell(6);
 			if (cell == null) {
 				cell = row.createCell(6);

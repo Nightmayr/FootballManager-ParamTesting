@@ -5,10 +5,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginResult {
 	
-	@FindBy(id = "errorMessage")
+	@FindBy(id = "errorMessageLogin")
 	private WebElement outputMessage;
 	
-	@FindBy(id = "header")
+	@FindBy(id = "name")
 	private WebElement redirectPage;
 	
 	public String loginAttemptText() {

@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.FileInputStream;
@@ -83,14 +83,18 @@ public class LeaveListParametisedTest {
 	@Test
 	public void addAccountAttempt() throws IOException, InterruptedException {
 
-		driver.get(Constant.ADDACCOUNTPAGE);
+		driver.get(Constant.LOCAL_BASE + Constant.ADD_ACCOUNT_PAGE);
 		JoinEntry addAccountPage = PageFactory.initElements(driver, JoinEntry.class);
 		addAccountPage.addAccount(fullName, email, password, confirmPassword);
 
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
 
 		JoinResult addAccountResult = PageFactory.initElements(driver, JoinResult.class);
-
+		addAccountResult.joinButtonClick();
+		addAccountResult.joinButtonClick();
+		
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(12);
@@ -102,10 +106,10 @@ public class LeaveListParametisedTest {
 			cell = row.createCell(5);
 		}
 
-		cell.setCellValue(addAccountResult.leaveAttemptText());
+		cell.setCellValue(addAccountResult.joinAttemptText());
 
 		try {
-			assertFalse(addAccountResult.leaveAttemptText().contains(expected));
+			assertEquals("Test failure.", expected, addAccountResult.joinAttemptText());
 			cell = row.getCell(6);
 			if (cell == null) {
 				cell = row.createCell(6);

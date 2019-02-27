@@ -73,11 +73,11 @@ public class LoginNoEmailParaTest {
 	@Test
 	public void loginAttempt() throws IOException, InterruptedException {
 
-		driver.get(Constant.LOGINPAGE);
+		driver.get(Constant.LOCAL_BASE);
 		LoginEntry loginPage = PageFactory.initElements(driver, LoginEntry.class);
 		loginPage.loginNoEmail(password);
 
-		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 
 		LoginResult loginResult = PageFactory.initElements(driver, LoginResult.class);
 

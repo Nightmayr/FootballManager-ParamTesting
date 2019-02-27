@@ -76,12 +76,12 @@ public class LoginParametisedTest {
 	@Test
 	public void loginAttempt() throws IOException, InterruptedException {
 
-		driver.get(Constant.LOGINPAGE);
+		driver.get(Constant.LOCAL_BASE);
 		LoginEntry loginPage = PageFactory.initElements(driver, LoginEntry.class);
 		loginPage.loginAttempt(email, password);
 
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
+		driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
+		
 		LoginResult loginResult = PageFactory.initElements(driver, LoginResult.class);
 
 		FileInputStream file = new FileInputStream(Constant.FILELOCATION);
